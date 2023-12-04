@@ -94,10 +94,12 @@
             // rBtnComb
             // 
             this.rBtnComb.AutoSize = true;
+            this.rBtnComb.Checked = true;
             this.rBtnComb.Location = new System.Drawing.Point(221, 87);
             this.rBtnComb.Name = "rBtnComb";
             this.rBtnComb.Size = new System.Drawing.Size(83, 17);
             this.rBtnComb.TabIndex = 11;
+            this.rBtnComb.TabStop = true;
             this.rBtnComb.Text = "Combination";
             this.rBtnComb.UseVisualStyleBackColor = true;
             this.rBtnComb.CheckedChanged += new System.EventHandler(this.rBtnComb_CheckedChanged);
@@ -109,7 +111,6 @@
             this.rBtnPlac.Name = "rBtnPlac";
             this.rBtnPlac.Size = new System.Drawing.Size(75, 17);
             this.rBtnPlac.TabIndex = 12;
-            this.rBtnPlac.TabStop = true;
             this.rBtnPlac.Text = "Placement";
             this.rBtnPlac.UseVisualStyleBackColor = true;
             this.rBtnPlac.CheckedChanged += new System.EventHandler(this.rBtnPlac_CheckedChanged);
@@ -121,7 +122,6 @@
             this.rBtnPerm.Name = "rBtnPerm";
             this.rBtnPerm.Size = new System.Drawing.Size(86, 17);
             this.rBtnPerm.TabIndex = 13;
-            this.rBtnPerm.TabStop = true;
             this.rBtnPerm.Text = "Permutations";
             this.rBtnPerm.UseVisualStyleBackColor = true;
             this.rBtnPerm.CheckedChanged += new System.EventHandler(this.rBtnPerm_CheckedChanged);

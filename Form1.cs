@@ -16,25 +16,53 @@ namespace EducationalPractice1
         {
             InitializeComponent();
         }
-        static int Factorial(int n)
+        private int Factorial(int num)
         {
             int result = 1;
-            for (int i = 1; i <= n; i++)
+            for (int i = 1; i <= num; i++)
             {
                 result *= i;
             }
             return result;
         }
-        public static int CombinationCalculate(int m, int n)
+        private int CombinationCalculate(int m, int n)
         {
-
-            int result = Factorial(n + m - 1) / (Factorial(m) * Factorial(n - 1));
+            int result = Factorial(m + n - 1) / (Factorial(n) * Factorial(m - 1));
             return result;
         }
         private int PlacementCalculate(int m, int n)
         {
-            int result = (int) Math.Pow(n, m);
+            int result = (int)Math.Pow(n, m);
             return result;
+        }
+        private List<string> FindPermutationsWithRepetitions(string input)
+        {
+            List<string> permutations = new List<string>();
+            GeneratePermutations("", input, permutations);
+            return permutations;
+        }
+        private void GeneratePermutations(string prefix, string input, List<string> permutations)
+        {
+            int length = input.Length;
+
+            if (length == 0)
+            {
+                permutations.Add(prefix);
+            }
+            else
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    GeneratePermutations(prefix + input[i], input, permutations);
+                }
+            }
+        }
+        private void PrintPermutations(List<string> permutations)
+        {
+            foreach (string permutation in permutations)
+            {
+                lblResult.Text = (permutation + Environment.NewLine);
+            }
         }
         private int PermutationsCalculate(int n)
         {
@@ -44,8 +72,8 @@ namespace EducationalPractice1
 
         private void btnCalc_Click(object sender, EventArgs e)
         {
-            int m = int.Parse(txtM.Text);
-            int n = int.Parse(txtN.Text);
+            int.TryParse(txtM.Text, out int m);
+            int.TryParse(txtN.Text, out int n);
             if (rBtnComb.Checked == true && rBtnPerm.Checked == false && rBtnPlac.Checked == false)
             {
                 int res = CombinationCalculate(n, m);
@@ -60,8 +88,9 @@ namespace EducationalPractice1
             }
             if (rBtnComb.Checked == false && rBtnPerm.Checked == false && rBtnPlac.Checked == true)
             {
-                int res = PermutationsCalculate(n);
-                lblResult.Text = "Result: " + res.ToString();
+                string input = n.ToString();
+                List<string> permutations = FindPermutationsWithRepetitions(input);
+                PrintPermutations(permutations);
                 ClearFields();
             }
         }
