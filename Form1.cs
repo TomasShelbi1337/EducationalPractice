@@ -16,6 +16,7 @@ namespace EducationalPractice1
         {
             InitializeComponent();
         }
+        // метод для вычисления факториала
         private int Factorial(int num)
         {
             int result = 1;
@@ -25,76 +26,72 @@ namespace EducationalPractice1
             }
             return result;
         }
+        // метод вычисления сочетания
         private int CombinationCalculate(int m, int n)
         {
             int result = Factorial(m + n - 1) / (Factorial(n) * Factorial(m - 1));
             return result;
         }
+        // метод вычисления размещения
         private int PlacementCalculate(int m, int n)
         {
             int result = (int)Math.Pow(n, m);
             return result;
         }
-        private List<string> FindPermutationsWithRepetitions(string input)
-        {
-            List<string> permutations = new List<string>();
-            GeneratePermutations("", input, permutations);
-            return permutations;
-        }
-        private void GeneratePermutations(string prefix, string input, List<string> permutations)
-        {
-            int length = input.Length;
-
-            if (length == 0)
-            {
-                permutations.Add(prefix);
-            }
-            else
-            {
-                for (int i = 0; i < length; i++)
-                {
-                    GeneratePermutations(prefix + input[i], input, permutations);
-                }
-            }
-        }
-        private void PrintPermutations(List<string> permutations)
-        {
-            foreach (string permutation in permutations)
-            {
-                lblResult.Text = (permutation + Environment.NewLine);
-            }
-        }
+        // метод вычисления перестановок
         private int PermutationsCalculate(int n)
         {
             int result = Factorial(n);
             return result;
         }
-
+        // кнопка вычислить которая запускает метод
         private void btnCalc_Click(object sender, EventArgs e)
         {
             int.TryParse(txtM.Text, out int m);
             int.TryParse(txtN.Text, out int n);
-            if (rBtnComb.Checked == true && rBtnPerm.Checked == false && rBtnPlac.Checked == false)
+            // проверка ввода 0 и отрицательных значений
+            if (n <= 0 && m <= 0)
             {
-                int res = CombinationCalculate(n, m);
-                lblResult.Text = "Result: " + res.ToString();
+                MessageBox.Show("Введённые значения меньше, либо равны 0, введите другие значения");
                 ClearFields();
             }
-            if (rBtnComb.Checked == false && rBtnPerm.Checked == true && rBtnPlac.Checked == false)
+            else
             {
-                int res = PlacementCalculate(n, m);
-                lblResult.Text = "Result: " + res.ToString();
-                ClearFields();
-            }
-            if (rBtnComb.Checked == false && rBtnPerm.Checked == false && rBtnPlac.Checked == true)
-            {
-                string input = n.ToString();
-                List<string> permutations = FindPermutationsWithRepetitions(input);
-                PrintPermutations(permutations);
-                ClearFields();
-            }
-        }
+                // запуск метода в зависимости от выбранного пункта
+                if (rBtnComb.Checked == true && rBtnPerm.Checked == false && rBtnPlac.Checked == false)
+                {
+                    // проверка вводимых значений которые больше 20
+                    if (n > 20 || m > 20)
+                    {
+                        MessageBox.Show("Введённые значения больше 20, введите другие значения");
+                        ClearFields();
+                    }
+                    else
+                    // вывод результатов метода вычисления сочетания
+                    {
+                        int res = CombinationCalculate(n, m);
+                        lblResult.Text = "Result: " + res.ToString();
+                        ClearFields();
+                    }
 
+                }
+                // вывод результатов метода вычисления перестановок
+                if (rBtnComb.Checked == false && rBtnPerm.Checked == true && rBtnPlac.Checked == false)
+                {
+                    int res = PermutationsCalculate(n);
+                    lblResult.Text = "Result: " + res.ToString();
+                    ClearFields();
+                }
+                // вывод результатов метода вычисления размещения
+                if (rBtnComb.Checked == false && rBtnPerm.Checked == false && rBtnPlac.Checked == true)
+                {
+                    int res = PlacementCalculate(n, m);
+                    lblResult.Text = "Result: " + res.ToString();
+                    ClearFields();
+                }
+            } 
+        }
+        // выбор кнопки сочетания
         private void rBtnComb_CheckedChanged(object sender, EventArgs e)
         {
             if (rBtnComb.Checked == true)
@@ -103,7 +100,7 @@ namespace EducationalPractice1
                 rBtnPlac.Checked = false;
             }
         }
-
+        // выбор кнопки размещения
         private void rBtnPlac_CheckedChanged(object sender, EventArgs e)
         {
             if (rBtnPlac.Checked == true)
@@ -112,7 +109,7 @@ namespace EducationalPractice1
                 rBtnComb.Checked = false;
             }
         }
-
+        // выбор кнопки перестановки
         private void rBtnPerm_CheckedChanged(object sender, EventArgs e)
         {
             if (rBtnPerm.Checked == true)
@@ -126,6 +123,7 @@ namespace EducationalPractice1
                 txtM.Enabled = true;
             }
         }
+        // очистка полей ввода
         private void ClearFields()
         {
             txtM.Text = "";
