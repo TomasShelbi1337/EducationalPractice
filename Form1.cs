@@ -41,7 +41,8 @@ namespace EducationalPractice1
         // метод вычисления перестановок
         private int PermutationsCalculate(int n)
         {
-            int result = Factorial(n);
+            int g = Factorial(n) * Factorial(n) * Factorial(n);
+            int result = Factorial(n * 3) / g;
             return result;
         }
         // кнопка вычислить которая запускает метод
@@ -85,7 +86,7 @@ namespace EducationalPractice1
                 // вывод результатов метода вычисления размещения
                 if (rBtnComb.Checked == false && rBtnPerm.Checked == false && rBtnPlac.Checked == true)
                 {
-                    int res = PlacementCalculate(n, m);
+                    int res = PlacementCalculate(m, n);
                     lblResult.Text = "Result: " + res.ToString();
                     ClearFields();
                 }
