@@ -39,10 +39,10 @@ namespace EducationalPractice1
             // проверка условия, если поля пустые
             if (string.IsNullOrWhiteSpace(tSurname.Text) || string.IsNullOrWhiteSpace(tName.Text) || string.IsNullOrWhiteSpace(tPatronymic.Text) || string.IsNullOrWhiteSpace(tPd.Text))
             {
-                MessageBox.Show("Заполните все поля.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Заполните все поля.", "Ошибка");
                 return;
             }
-            string log;
+            string log = "";
             string pas;
             // генерация логина для заказчика
             if (rCustomer.Checked)
@@ -53,7 +53,6 @@ namespace EducationalPractice1
                 string s13 = tPd.Text.Substring(12, 1);
                 string lastDigits = tPd.Text.Substring(tPd.Text.Length - 2);
                 log = $"{surname.Substring(0, 1)}{name.Substring(0, 1)}{patronymic.Substring(0, 1)}{s13}{lastDigits}";
-                tLog.Text = log;
             }
             // генерация логина для сотрудника
             else if (rEmployee.Checked)
@@ -63,7 +62,6 @@ namespace EducationalPractice1
                 string patronymic = tPatronymic.Text;
                 string year = tPd.Text.Substring(7, 3);
                 log = $"{surname.Substring(0, 1)}{name.Substring(0, 1)}{patronymic.Substring(0, 1)}{year}";
-                tLog.Text = log;
             }
             Random r = new Random();
             // получаем 2 случайных маленьких буквы и 2 заглавных
@@ -79,18 +77,22 @@ namespace EducationalPractice1
             // добавляем все символы в переменную
             pas = $"{sym1}{sym2}{sym3}{sym4}{num1}{num2}{sym4}{sym3}";
 
-            // выводим пароль 
-            tPas.Text = pas;
+            // выводим пароль если все поля заполнены верно
             if (!Check(tSurname.Text) || !Check(tName.Text) || !Check(tPatronymic.Text))
             {
-                MessageBox.Show(" Вводите только буквы в поля Фамилия, Имя и Отчество.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(" Вводите только буквы в поля Фамилия, Имя и Отчество.", "Ошибка");
                 return;
+            }
+            else
+            {
+                tPas.Text = pas;
+                tLog.Text = log;
             }
         }
         // метод проверки воодимых значений на наличие символов помимо букв
-        private bool Check(string text)
+        private bool Check(string t)
         {
-            return text.All(c => char.IsLetter(c));
+            return t.All(c => char.IsLetter(c));
         }
     }
 }
