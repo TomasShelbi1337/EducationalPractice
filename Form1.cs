@@ -42,7 +42,8 @@ namespace EducationalPractice1
                 MessageBox.Show("Заполните все поля.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string login;
+            string log;
+            string pas;
             // генерация логина для заказчика
             if (rCustomer.Checked)
             {
@@ -51,8 +52,8 @@ namespace EducationalPractice1
                 string patronymic = tPatronymic.Text;
                 string s13 = tPd.Text.Substring(12, 1);
                 string lastDigits = tPd.Text.Substring(tPd.Text.Length - 2);
-                login = $"{surname.Substring(0, 1)}{name.Substring(0, 1)}{patronymic.Substring(0, 1)}{s13}{lastDigits}";
-                tLog.Text = login;
+                log = $"{surname.Substring(0, 1)}{name.Substring(0, 1)}{patronymic.Substring(0, 1)}{s13}{lastDigits}";
+                tLog.Text = log;
             }
             // генерация логина для сотрудника
             else if (rEmployee.Checked)
@@ -61,32 +62,32 @@ namespace EducationalPractice1
                 string name = tName.Text;
                 string patronymic = tPatronymic.Text;
                 string year = tPd.Text.Substring(7, 3);
-                login = $"{surname.Substring(0, 1)}{name.Substring(0, 1)}{patronymic.Substring(0, 1)}{year}";
-                tLog.Text = login;
+                log = $"{surname.Substring(0, 1)}{name.Substring(0, 1)}{patronymic.Substring(0, 1)}{year}";
+                tLog.Text = log;
             }
             Random r = new Random();
             // получаем 2 случайных маленьких буквы и 2 заглавных
-            char letter1 = (char)('a' + r.Next(0, 26));
-            char letter2 = (char)('a' + r.Next(0, 26));
-            char letter3 = (char)('A' + r.Next(0, 26));
-            char letter4 = (char)('A' + r.Next(0, 26));
+            char sym1 = (char)('a' + r.Next(0, 26));
+            char sym2 = (char)('a' + r.Next(0, 26));
+            char sym3 = (char)('A' + r.Next(0, 26));
+            char sym4 = (char)('A' + r.Next(0, 26));
             // получаем 2 случайные цифры
             Random rnd = new Random();
-            int number1 = rnd.Next(10);
-            int number2 = rnd.Next(10);
+            int num1 = rnd.Next(10);
+            int num2 = rnd.Next(10);
 
             // добавляем все символы в переменную
-            string password = $"{letter1}{letter2}{letter3}{letter4}{number1}{number2}{letter4}{letter3}";
+            pas = $"{sym1}{sym2}{sym3}{sym4}{num1}{num2}{sym4}{sym3}";
 
             // выводим пароль 
-            tPas.Text = password;
+            tPas.Text = pas;
             if (!Check(tSurname.Text) || !Check(tName.Text) || !Check(tPatronymic.Text))
             {
                 MessageBox.Show(" Вводите только буквы в поля Фамилия, Имя и Отчество.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }
-        // метод проверки воодимых значений на наличие цифр
+        // метод проверки воодимых значений на наличие символов помимо букв
         private bool Check(string text)
         {
             return text.All(c => char.IsLetter(c));
