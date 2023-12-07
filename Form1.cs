@@ -129,6 +129,10 @@ namespace EducationalPractice1
                 double.TryParse(tQch.Text, out double z);
                 chlCost = (cost * 0.9) * z;
             }
+            else
+            {
+                chlCost = 0;
+            }
         }
         // проверка флажка багажа
         private void BagCh()
