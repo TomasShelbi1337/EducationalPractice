@@ -26,17 +26,16 @@ namespace EducationalPractice1
                 int count = (int)Math.Ceiling((Xmax - Xmin) / step) + 1;
                 // массивы точек
                 double[] x = new double[count];
-                double[] y1 = new double[count];
+                double[] y = new double[count];
                 // переменная для вычислений
-                var y = 5;
-                var z = 5;
-                var c = 5;
+                double y1 = 5;
+                double c = 5;
                 // цикл для выставления границ под точки
                 for (int i = 0; i < count; i++)
                 {
                     // формулы вычислений
                     x[i] = Xmin + step * i;
-                    y1[i] = (Math.Log(Math.Pow(y, - Math.Sqrt(Math.Abs(z)))) * (z - y / 2) + Math.Pow(Math.Sin(c), 2) * Math.Atan(c));
+                    y[i] = (Math.Log(Math.Pow(y1, -Math.Sqrt(Math.Abs(x[i])))) * (x[i] - y1 / 2) + Math.Pow(Math.Sin(c), 2) * Math.Atan(c));
                 }
                 // настраиваем оси графика
                 chart1.ChartAreas[0].AxisX.Minimum = Xmin;
@@ -44,7 +43,7 @@ namespace EducationalPractice1
                 // настраиваем шаг сетки
                 chart1.ChartAreas[0].AxisX.MajorGrid.Interval = step;
                 // задаём точки на графике
-                chart1.Series[0].Points.DataBindXY(x, y1);
+                chart1.Series[0].Points.DataBindXY(x, y);
             }
             else
             {
