@@ -20,7 +20,9 @@ namespace EducationalPractice1
         {
             if (double.TryParse(txtXmin.Text, out double Xmin) &&
             double.TryParse(txtXmax.Text, out double Xmax) &&
-            double.TryParse(txtStep.Text, out double step))
+            double.TryParse(txtStep.Text, out double step) && 
+            double.TryParse(txtY.Text, out double y1) &&
+            double.TryParse(txtZ.Text, out double z))
             {
                 // узнаём количество точек графика
                 int count = (int)Math.Ceiling((Xmax - Xmin) / step) + 1;
@@ -28,14 +30,12 @@ namespace EducationalPractice1
                 double[] x = new double[count];
                 double[] y = new double[count];
                 // переменная для вычислений
-                double y1 = 5;
-                double c = 5;
                 // цикл для выставления границ под точки
                 for (int i = 0; i < count; i++)
                 {
                     // формулы вычислений
                     x[i] = Xmin + step * i;
-                    y[i] = (Math.Log(Math.Pow(y1, -Math.Sqrt(Math.Abs(x[i])))) * (x[i] - y1 / 2) + Math.Pow(Math.Sin(c), 2) * Math.Atan(c));
+                    y[i] = (Math.Log (Math.Pow (y1, - Math.Sqrt (Math.Abs (x[i])))) * (x[i] - y1 / 2) + Math.Pow (Math.Sin (z), 2) * Math.Atan(z));
                 }
                 // настраиваем оси графика
                 chart1.ChartAreas[0].AxisX.Minimum = Xmin;
