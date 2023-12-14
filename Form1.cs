@@ -18,13 +18,14 @@ namespace EducationalPractice1
         public Form1()
         {
             InitializeComponent();
+            // создаем массив с 9 переменными равными 9 кнопкам
             buttons = new Button[] { button1, button2, button3, button4, button5, button6, button7, button8, button9 };
             NewGame();
         }
         private void Button_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-
+            // пишем значения в кнопки
             if (button.Text == "")
             {
                 if (player1Turn)
@@ -34,24 +35,25 @@ namespace EducationalPractice1
 
                 turnCount++;
                 player1Turn = !player1Turn;
-
+                // проверяем кто победил
                 if (CheckForWin())
                 {
                     string winner = player1Turn ? "Player 2" : "Player 1";
                     MessageBox.Show(winner + " wins!", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     NewGame();
                 }
+                // ничья
                 else if (turnCount == 9)
                 {
-                    MessageBox.Show("It's a tie!", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Draw!", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     NewGame();
                 }
             }
         }
-
+        // метод проверки выйгрыша
         private bool CheckForWin()
         {
-            // Проверяем все возможные комбинации выигрышных троек
+            // проверяем все возможные комбинации выигрышных троек
             if (CheckLine(0, 1, 2) || CheckLine(3, 4, 5) || CheckLine(6, 7, 8) ||
                 CheckLine(0, 3, 6) || CheckLine(1, 4, 7) || CheckLine(2, 5, 8) ||
                 CheckLine(0, 4, 8) || CheckLine(2, 4, 6))
@@ -61,7 +63,7 @@ namespace EducationalPractice1
 
             return false;
         }
-
+        // метод для определения Х и О среди кнопок
         private bool CheckLine(int index1, int index2, int index3)
         {
             if (buttons[index1].Text != "" &&
@@ -73,7 +75,7 @@ namespace EducationalPractice1
 
             return false;
         }
-
+        // обнуляет все переменные и данные для новой игры
         private void NewGame()
         {
             foreach (Button button in buttons)
